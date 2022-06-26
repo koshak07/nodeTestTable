@@ -8,7 +8,7 @@ class VendorCodeController {
     try {
       const { name, firstCoast, erp, brandId } = req.body;
       const { mainImage } = req.files;
-      let fileName = uuid.v4() + ".jpg";
+      let fileName = name + ".jpg";
       mainImage.mv(path.resolve(__dirname, "..", "static", fileName));
 
       const vendoreCode = await VendorCode.create({
@@ -23,13 +23,19 @@ class VendorCodeController {
       next(ApiError.badRequest(e.message));
     }
   }
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     let { limit, page } = req.query;
     page = page || 1;
     limit = limit || 9;
     let offset = page * limit - limit;
-    const vendoreCode = await VendorCode.findAndCountAll(limit, offset);
-    return res.json(vendoreCode);
+    try {
+      const vendoreCode = await VendorCode.findAll();
+      res.json(vendoreCode);
+      return res.json(vendoreCode);
+    } catch (e) {
+      next();
+    }
+    return next();
   }
   async getOne(req, res) {
     const { id } = req.params;

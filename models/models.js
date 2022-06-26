@@ -28,9 +28,9 @@ const Nomenclature = sequelize.define("nomenclature", {
   firstCoast: { type: DataTypes.INTEGER },
   erp: { type: DataTypes.INTEGER },
 });
-const MappingTable = sequelize.define("mappingTable", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
+// const MappingTable = sequelize.define("mappingTable", {
+//   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+// });
 
 const Brand = sequelize.define("brand", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -83,8 +83,6 @@ const DataSklad = sequelize.define("dataSklad", {
   quantity: { type: DataTypes.INTEGER },
 });
 
-// User.hasMany(Role);
-// Role.belongsTo(User);
 Role.hasMany(User);
 User.belongsTo(Role);
 

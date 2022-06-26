@@ -9,7 +9,6 @@ const models = require("./models/models");
 const router = require("./routes/index.js");
 const errorHandler = require("./middleware/ErrorHandlingMiddleware");
 const path = require("path");
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -23,6 +22,7 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
+    console.log(process.env.PORT);
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   } catch (e) {
     console.log(e);

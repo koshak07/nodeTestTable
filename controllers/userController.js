@@ -42,11 +42,8 @@ class UserController {
     return res.json({ token });
   }
   async check(req, res, next) {
-    const { id } = req.query;
-    if (!id) {
-      return next(ApiError.badRequest("ID not set"));
-    }
-    res.json(id);
+    const token = generateJwt(req.user.id, req.user.userName, req.user.roleId);
+    return res.json({ token });
   }
 }
 
