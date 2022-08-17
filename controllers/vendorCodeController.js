@@ -30,17 +30,21 @@ class VendorCodeController {
     let offset = page * limit - limit;
     try {
       const vendoreCode = await VendorCode.findAll();
-      res.json(vendoreCode);
+
       return res.json(vendoreCode);
     } catch (e) {
       next();
     }
     return next();
   }
-  async getOne(req, res) {
+  async getOne(req, res, next) {
     const { id } = req.params;
-    const vendorCode = await VendorCode.findOne({ where: { id } });
-    return res.json(vendorCode);
+    try {
+      const vendorCode = await VendorCode.findOne({ where: { id } });
+      return res.json(vendorCode);
+    } catch (e) {
+      next();
+    }
   }
 }
 

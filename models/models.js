@@ -17,16 +17,14 @@ const Role = sequelize.define("role", {
 const VendorCode = sequelize.define("vendorCode", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   mainImage: { type: DataTypes.STRING, allowNull: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  firstCoast: { type: DataTypes.INTEGER },
-  erp: { type: DataTypes.INTEGER },
+  name: { type: DataTypes.STRING, allowNull: false, unique: true },
 });
 const Nomenclature = sequelize.define("nomenclature", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  mainImage: { type: DataTypes.STRING, allowNull: true },
-  barcode: { type: DataTypes.STRING },
-  firstCoast: { type: DataTypes.INTEGER },
-  erp: { type: DataTypes.INTEGER },
+  mainImage: { type: DataTypes.STRING, allowNull: false },
+  barcode: { type: DataTypes.STRING, allowNull: false, unique: true },
+  firstCoast: { type: DataTypes.INTEGER, allowNull: false },
+  erp: { type: DataTypes.INTEGER, allowNull: false },
 });
 // const MappingTable = sequelize.define("mappingTable", {
 //   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -34,7 +32,7 @@ const Nomenclature = sequelize.define("nomenclature", {
 
 const Brand = sequelize.define("brand", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false, unique: true },
 });
 const Sklad = sequelize.define("sklad", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
