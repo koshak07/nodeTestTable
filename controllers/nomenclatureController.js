@@ -35,7 +35,7 @@ class NomenclatureController {
       next(ApiError.badRequest(e.message));
     }
   }
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       const nomenclature = await Nomenclature.findAll();
       res.json(nomenclature);
@@ -45,6 +45,14 @@ class NomenclatureController {
     }
     return next();
   }
-  async getOne(req, res) {}
+  async getOne(req, res, next) {
+    const { id } = req.params;
+    try {
+      const vendorCode = await Nomenclature.findOne({ where: { id } });
+      return res.json(nomenclature);
+    } catch (e) {
+      next();
+    }
+  }
 }
 module.exports = new NomenclatureController();
